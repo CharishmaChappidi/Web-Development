@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Responsive Grid Layout</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #007bff;
+      color: white;
+      padding: 15px 20px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .content, .sidebar {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .content-section {
+      margin-bottom: 30px;
+    }
+
+    .content-section img {
+      max-width: 100%;
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+
+    footer {
+      background-color: #007bff;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+    }
+
+    @media screen and (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <div class="logo">GridSite</div>
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Projects</a>
+        <a href="#">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="grid-container">
+    <div class="content">
+      <div class="content-section">
+        <h2>Welcome to GridSite</h2>
+        <p>This page demonstrates a clean responsive layout using CSS Grid for content and Flexbox for navigation. It's mobile-friendly and adapts well to different screen sizes.</p>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNlSafe0aDy8VjtbTEUkyJgWhkbGr9tW2fjQ&s" alt="Placeholder image">
+      </div>
+
+      <div class="content-section">
+        <h3>Why CSS Grid?</h3>
+        <p>CSS Grid is ideal for two-dimensional layouts, letting you control rows and columns precisely. It allows you to build complex layouts with minimal code.</p>
+        <ul>
+          <li>Better control over layout structure</li>
+          <li>Clean, semantic HTML and CSS</li>
+          <li>Responsive design with media queries</li>
+        </ul>
+      </div>
+
+      <div class="content-section">
+        <h3>Featured Article</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. In euismod lectus non libero eleifend, nec pulvinar sapien finibus.</p>
+        <p>Morbi rutrum magna ac libero dapibus, a facilisis ex porttitor. In hac habitasse platea dictumst. Donec efficitur, justo sed iaculis pharetra, est elit hendrerit odio, vel imperdiet nisl dolor et sapien.</p>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <h3>Sidebar Widgets</h3>
+      <p>Use this space for additional information like:</p>
+      <ul>
+        <li>Quick Links</li>
+        <li>Recent Posts</li>
+        <li>Subscribe Box</li>
+        <li>Promotions</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 GridSite | Designed with CSS Grid and Flexbox
+  </footer>
+
+</body>
+</html>

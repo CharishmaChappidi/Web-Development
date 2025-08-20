@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Form - Intermediate</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        input[type="text"], input[type="email"], input[type="tel"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .message {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Form</h1>
+
+    <div class="container">
+         <div class="form-group">
+            <label for="name">First Name:</label>
+            <input type="text" id="first-name" placeholder="Enter your First Name" required>
+        </div>
+        <div class="form-group">
+            <label for="name">Last Name:</label>
+            <input type="text" id="last-name" placeholder="Enter your Last Name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" placeholder="Enter your phone number" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter your password" required>
+        </div>
+
+        <div class="error" id="password-error"></div>
+
+        <button class="btn"  id="submit">Submit</button>
+
+        <div class="message" id="message"></div>
+    </div>
+    <script>
+document.getElementById('submit').addEventListener('click', function () {
+    const firstName = document.getElementById('first-name').value.trim();
+    const lastName = document.getElementById('last-name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const password = document.getElementById('password').value;
+
+    const error = document.getElementById('password-error');
+    const message = document.getElementById('message');
+
+    // Reset messages
+    error.textContent = '';
+    message.textContent = '';
+
+    // Validate required fields
+    if (!firstName || !lastName || !email || !phone || !password) {
+        error.textContent = 'All fields are required.';
+        return;
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        error.textContent = 'Please enter a valid email address.';
+        return;
+    }
+
+    // Validate phone format (10 digits)
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(phone)) {
+        error.textContent = 'Please enter a valid 10-digit phone number.';
+        return;
+    }
+
+    // Validate password length
+    if (password.length < 6) {
+        error.textContent = 'Password must be at least 6 characters long.';
+        return;
+    }
+    // Redirect after successful validation
+    window.location.href = "Task_2(2).html";
+
+
+});
+</script>
+
+
+
+</body>
+</html>
