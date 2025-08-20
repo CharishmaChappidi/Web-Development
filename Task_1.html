@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My First Webpage</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #b0aaaa;
+      color: #333;
+      margin: 40px;
+      line-height: 1.6;
+    }
+
+    h1 {
+      color: #be895de1;
+      text-align: center;
+    }
+
+    img {
+      width: 300px;
+      border-radius: 8px;
+    }
+
+    a {
+      color: #3498db;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <h1>Basic Webpage</h1>
+  <p>This is Basic Webpage which is consist of HTML Logo and Tutoril.</p>
+
+  <h2>HTML Logo</h2>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/1200px-HTML5_logo_and_wordmark.svg.png" alt="HTML">
+  <p>Learn more on 
+     <a href="https://www.w3schools.com/html/" target="_blank">HTML Tutorial</a>.
+  </p>
+
+  <button onclick="showMessage()">Click Me!</button>
+
+  <script>
+    function showMessage() {
+      alert("Hello User! Wellcome....");
+    }
+  </script>
+
+</body>
+</html>
