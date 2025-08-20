@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fetch Joke API</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #e6f7ff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      color: #0077b6;
+    }
+
+    #joke {
+      font-size: 1.2rem;
+      margin: 20px;
+      max-width: 500px;
+      text-align: center;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005f8a;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Get a Random Joke</h1>
+  <div id="joke">Click the button to fetch a joke!</div>
+  <button onclick="getJoke()">Get Joke</button>
+
+  <script>
+    async function getJoke() {
+      try {
+        const response = await fetch('https://official-joke-api.appspot.com/random_joke');
+        const data = await response.json();
+        document.getElementById('joke').innerText = `${data.setup} 🤔\n\n${data.punchline} 😂`;
+      } catch (error) {
+        document.getElementById('joke').innerText = 'Failed to fetch joke. Try again!';
+      }
+    }
+  </script>
+
+</body>
+</html>

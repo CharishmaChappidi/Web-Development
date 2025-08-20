@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To-Do & Notes App</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f4f8;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #0077cc;
+      margin-bottom: 2rem;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: inherit;
+    }
+
+    button {
+      padding: 0.75rem 1rem;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background: white;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    li.completed {
+      text-decoration: line-through;
+      color: #888;
+    }
+
+    .actions button {
+      margin-left: 0.5rem;
+      background-color: #ff4d4d;
+    }
+
+    .actions button.complete {
+      background-color: #28a745;
+    }
+
+    textarea {
+      height: 150px;
+      resize: vertical;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📝 To-Do & Notes App</h1>
+
+  <!-- To-Do Section -->
+  <section>
+    <h2>✅ To-Do List</h2>
+    <form id="todoForm">
+      <input type="text" id="taskInput" placeholder="Enter a task..." required />
+      <button type="submit">Add Task</button>
+    </form>
+    <ul id="taskList"></ul>
+  </section>
+
+  <!-- Notes Section -->
+  <section>
+    <h2>🗒️ Notes</h2>
+    <textarea id="notesArea" placeholder="Write your notes here..."></textarea>
+    <button onclick="saveNotes()">Save Notes</button>
+  </section>
+
+  <script>
+    // To-Do List Logic
+    const taskForm = document.getElementById("todoForm");
+    const taskInput = document.getElementById("taskInput");
+    const taskList = document.getElementById("taskList");
+
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+    function saveTasks() {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+
+    function renderTasks() {
+      taskList.innerHTML = "";
+      tasks.forEach((task, index) => {
+        const li = document.createElement("li");
+        li.className = task.completed ? "completed" : "";
+        li.textContent = task.text;
+
+        const actions = document.createElement("div");
+        actions.className = "actions";
+
+        const completeBtn = document.createElement("button");
+        completeBtn.textContent = "✓";
+        completeBtn.className = "complete";
+        completeBtn.onclick = () => {
+          tasks[index].completed = !tasks[index].completed;
+          saveTasks();
+          renderTasks();
+        };
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "🗑";
+        deleteBtn.onclick = () => {
+          tasks.splice(index, 1);
+          saveTasks();
+          renderTasks();
+        };
+
+        actions.appendChild(completeBtn);
+        actions.appendChild(deleteBtn);
+        li.appendChild(actions);
+        taskList.appendChild(li);
+      });
+    }
+
+    taskForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const newTask = taskInput.value.trim();
+      if (newTask) {
+        tasks.push({ text: newTask, completed: false });
+        saveTasks();
+        renderTasks();
+        taskInput.value = "";
+      }
+    });
+
+    renderTasks();
+
+    // Notes Logic
+    const notesArea = document.getElementById("notesArea");
+
+    function saveNotes() {
+      localStorage.setItem("notes", notesArea.value);
+      alert("Notes saved!");
+    }
+
+    function loadNotes() {
+      const savedNotes = localStorage.getItem("notes");
+      if (savedNotes) {
+        notesArea.value = savedNotes;
+      }
+    }
+
+    loadNotes();
+  </script>
+
+</body>
+</html>

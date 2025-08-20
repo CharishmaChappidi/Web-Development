@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GlobeTrekker Adventures</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #0077b6;
+    }
+
+    .hero {
+      background-color: #d0f0ff;
+      padding: 30px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .service-card {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .testimonials {
+      background-color: #e6f4f1;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .testimonials blockquote {
+      font-style: italic;
+      margin: 15px 0;
+    }
+
+    form {
+      max-width: 600px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    form input, form textarea {
+      padding: 10px;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    form button {
+      background-color: #0077b6;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #005a87;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 10px;
+      background-color: #cceeff;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        background-color: #eaf9ff;
+        font-size: 16px;
+        padding: 15px;
+      }
+
+      nav a {
+        display: inline-block;
+        margin: 5px 8px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        background-color: #ffffff;
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      header h1 {
+        font-size: 1.6rem;
+      }
+
+      nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      footer {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>GlobeTrekker Adventures</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Destinations</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Your Journey Begins Here</h2>
+    <p>Discover breathtaking destinations, curated travel experiences, and unforgettable memories with GlobeTrekker Adventures.</p>
+  </section>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>At GlobeTrekker, we specialize in crafting personalized travel packages that cater to your sense of adventure. Whether you dream of tropical beaches, mountain trails, or vibrant cities — we help you explore the world your way.</p>
+  </section>
+
+  <section id="services">
+    <h2>Popular Destinations</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3>Bali, Indonesia</h3>
+        <p>Experience serene beaches, vibrant culture, and lush green landscapes in this tropical paradise.</p>
+      </div>
+      <div class="service-card">
+        <h3>Swiss Alps</h3>
+        <p>Adventure through snowy peaks, charming villages, and alpine trails in the heart of Europe.</p>
+      </div>
+      <div class="service-card">
+        <h3>Tokyo, Japan</h3>
+        <p>Discover futuristic cities, ancient temples, and world-renowned cuisine in this dynamic country.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <h2>Traveler Stories</h2>
+    <blockquote>"Our honeymoon in the Maldives was absolutely magical. Thank you GlobeTrekker!" – Arjun & Maya</blockquote>
+    <blockquote>"Best decision ever! Smooth booking, amazing hotels, and perfect guides." – Neha R.</blockquote>
+  </section>
+
+  <section id="contact">
+    <h2>Get in Touch</h2>
+    <form onsubmit="handleSubmit(event)">
+      <label for="name">Name:</label>
+      <input type="text" id="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+
+      <label for="message">Message:</label>
+      <textarea id="message" rows="4" required></textarea>
+
+      <button type="submit">Send Inquiry</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 GlobeTrekker Adventures. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault(); // Stop form from submitting normally
+      alert("Thank you for reaching out! We'll get back to you shortly.");
+      event.target.reset(); // Clear form fields
+    }
+  </script>
+</body>
+</html>

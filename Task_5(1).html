@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Mini Store</title>
+  <link rel="preload" href="https://via.placeholder.com/250x150?text=Headphones" as="image">
+  <style>
+  * {
+  box-sizing: border-box; 
+  }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+  }
+  header {
+    background: #232f3e;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+  }
+  .product {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 1rem;
+    transition: transform 0.2s ease;
+  }
+  .product:hover {
+    transform: scale(1.02);
+  }
+  .product img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+  .product h3 {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #0f1111;
+  }
+  .product p {
+    color: #B12704;
+    font-weight: bold;
+    margin: 0.5rem 0;
+  }
+  .product button {
+    background: #ffa41c;
+    color: #0f1111;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .product button:hover {
+    background: #f08804;
+  }
+  .cart {
+    background: white;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 8px;
+    max-width: 400px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  .cart h2 {
+    margin-top: 0;
+  }
+  .cart ul {
+    list-style: none;
+    padding: 0;
+  }
+  .cart li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  } 
+  .total {
+    font-weight: bold;
+    margin-top: 1rem;
+    text-align: right;
+  }
+  @media (max-width: 600px) {
+    .container {
+      grid-template-columns: 1fr;
+    }
+    .cart {
+      width: 90%;
+      margin: 1rem auto;
+    }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Mini E-Commerce Store</h1>
+</header>
+
+<div class="container" id="productContainer"></div>
+
+<div class="cart" id="cart">
+  <h2>Your Cart</h2>
+  <ul id="cartItems"></ul>
+  <div class="total" id="cartTotal">Total: ₹0</div>
+</div>
+
+<script defer>
+  const products = [
+    { id: 1, name: "Wireless Headphones", price: 1999, image: "https://m.media-amazon.com/images/I/61e0R7kXZjL.jpg" },
+    { id: 2, name: "Smart Watch", price: 2999, image: "https://ae01.alicdn.com/kf/HTB1MQsOQhTpK1RjSZFMq6zG_VXaR/KW10-Smart-Watch-Women-2019-IP68-Waterproof-Sports-Fitness-Tracker-Heart-Rate-Monitoring-Bluetooth-Ladies-Smart.jpg" },
+    { id: 3, name: "Bluetooth Speaker", price: 1499, image: "https://static3.srcdn.com/wordpress/wp-content/uploads/2020/10/81g26BxrTAL.-AC-SL1500-.jpg" },
+    { id: 4, name: "Fitness Band", price: 999, image: "https://ts4.mm.bing.net/th?id=OIP.Mt52-09Y_KkiQGeHFLQCAAHaHa&pid=15.1" },
+    { id: 5, name: "Portable Charger", price: 799, image: "https://m.media-amazon.com/images/I/91W8Tbcp8rL._AC_SL1500_.jpg" },
+    { id: 6, name: "Noise Cancelling Earbuds", price: 2499, image: "https://www.bassheadspeakers.com/wp-content/uploads/2020/01/SOUNDPEATS-Dual-Driver-Noise-Cancelling-Earbuds.jpg" },
+    { id: 7, name: "Smartphone Tripod", price: 599, image: "https://m.media-amazon.com/images/I/619pwcOWFzL._AC_SL1300_.jpg" },
+    { id: 8, name: "USB-C Hub", price: 1299, image: "https://m.media-amazon.com/images/I/616+fsACGXL._AC_SL1500_.jpg" },
+    { id: 9, name: "Laptop Stand", price: 1099, image: "https://th.bing.com/th/id/R.3953516fe069b503ed4eb3828ae28ac8?rik=JgRhs9aNKB7iCQ&riu=http%3a%2f%2fwww.myclaw.in%2fwp-content%2fuploads%2f2020%2f12%2f1-2.jpg&ehk=S29uDD8KJpfVM74P3DIk1qWjMBpWHlO8vJ3jedNTRn0%3d&risl=&pid=ImgRaw&r=0" },
+    { id: 10, name: "Wireless Mouse", price: 699, image: "https://th.bing.com/th/id/OIP.vcyliS2sRIHnJEk7bWe1SAHaEw?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" },
+    { id: 11, name: "LED Desk Lamp", price: 899, image: "https://tse4.mm.bing.net/th/id/OIP.1dtmb6Q9iugTODEaeBkjzgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" },
+    { id: 12, name: "Smart Thermometer", price: 1199, image: "https://www.pproreviews.com/wp-content/uploads/2019/11/3.-Metene-Medical-Forehead-and-Ear-Thermometer-1024x1024.jpg" },
+    { id: 13, name: "Gaming Keyboard", price: 1999, image: "https://th.bing.com/th/id/OIP.hJRIgAclg3lqWrx87qqi3gAAAA?w=292&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" },
+    { id: 14, name: "Webcam HD", price: 1599, image: "https://tse2.mm.bing.net/th/id/OIP.oCrX7oxM-pqVge7r8TeMcgHaG7?rs=1&pid=ImgDetMain&o=7&rm=3" },
+    { id: 15, name: "Mini Projector", price: 3499, image: "https://m.media-amazon.com/images/I/61pKMIi0AfL._AC_.jpg" },
+    { id: 16, name: "Smart Plug", price: 499, image: "https://th.bing.com/th/id/OIP.RBGRLsPXjlg8H-nin2_pewHaHa?w=178&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" },
+    { id: 17, name: "Wi-Fi Range Extender", price: 1299, image: "https://m.media-amazon.com/images/I/51AH+Z2pr4L.jpg" },
+    { id: 18, name: "Digital Alarm Clock", price: 699, image: "https://th.bing.com/th/id/OIP.yeOK5v7MIskW4__EBktXlgHaF5?w=238&h=189&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" },
+    { id: 19, name: "Smart Bulb", price: 499, image: "https://th.bing.com/th/id/OIP.WbSIB3cc4WQEUmR-8q9oDgHaGU?w=228&h=194&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" },
+    { id: 20, name: "Phone Holder", price: 299, image: "https://th.bing.com/th/id/OIP.s3JTZWeoDTPeSLgQBRuPSwHaHa?w=189&h=189&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" },
+    { id: 21, name: "Laptop Sleeve", price: 899, image: "https://th.bing.com/th/id/OIP.FftWDf9AaVECScYnf4VWIwHaHa?w=181&h=181&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" },
+    { id: 22, name: "Bluetooth Tracker", price: 999, image: "https://th.bing.com/th/id/OIP.YpKx4ErsyS-Bn-d_NaRHdAHaE7?w=225&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" },
+    { id: 23, name: "Smart Scale", price: 1799, image: "https://th.bing.com/th/id/OIP.APkbAJND99qbwdBDGbm_xAHaHa?w=156&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" },
+    { id: 24, name: "Action Camera", price: 4999, image: "https://th.bing.com/th/id/OIP.Ot02bZiWWeb4KrDgGF-eyQHaHa?w=178&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" },
+    { id: 25, name: "VR Headset", price: 5999, image: "https://ts3.mm.bing.net/th?id=OIP.EuIM7E2-Os8yW9t4XkT7rQHaEK&pid=15.1" },
+    { id: 26, name: "Streaming Stick", price: 2499, image: "https://th.bing.com/th/id/OIP.3gDs6BWpPGnBYN_GQ_SSAwHaD4?w=308&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" },
+    { id: 27, name: "Smart Doorbell", price: 3999, image: "https://th.bing.com/th/id/OIP.jFOr2qkFFNjnu5WxSoEGmQHaHa?w=178&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" },
+    { id: 28, name: "Electric Kettle", price: 1499, image: "https://th.bing.com/th/id/OIP.foQCY16vsLG6Af2CdArXIgHaIw?w=167&h=198&c=7&r=0&o=5&dpr=1.3&pid=1.7" },
+    { id: 29, name: "Air Purifier", price: 6999, image: "https://th.bing.com/th/id/OIP.7xGuk26to7Ah6Q8d4UFqgQHaFb?w=281&h=205&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" },
+    { id: 30, name: "Robot Vacuum", price: 12999, image: "https://th.bing.com/th/id/OIP.cv1Uo6ZcC9aal_nHvBRtKAAAAA?w=165&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" }
+  ];
+
+  const cart = [];
+
+  function renderProducts() {
+    const container = document.getElementById('productContainer');
+    const fragment = document.createDocumentFragment();
+    products.forEach(({ id, name, price, image }) => {
+      const div = document.createElement('div');
+      div.className = 'product';
+      div.innerHTML = `
+        <img data-src="${image}" alt="${name}" loading="lazy" />
+        <h3>${name}</h3>
+        <p>₹${price}</p>
+        <button onclick="addToCart(${id})">Add to Cart</button>
+      `;
+      fragment.appendChild(div);
+    });
+    container.appendChild(fragment);
+  }
+
+  function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    cart.push(product);
+    updateCart();
+  }
+
+  function updateCart() {
+    const cartItems = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
+    cartItems.innerHTML = '';
+    let total = 0;
+    cart.forEach(({ name, price }) => {
+      const li = document.createElement('li');
+      li.textContent = `${name} - ₹${price}`;
+      cartItems.appendChild(li);
+      total += price;
+    });
+    cartTotal.textContent = `Total: ₹${total}`;
+  }
+
+  function lazyLoadImages() {
+    const imgs = document.querySelectorAll('img[data-src]');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            observer.unobserve(img);
+          }
+        });
+      });
+      imgs.forEach(img => observer.observe(img));
+    } else {
+      imgs.forEach(img => {
+        img.src = img.dataset.src;
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    renderProducts();
+    lazyLoadImages();
+  });
+  function addToCart(productId) {
+  const product = products.find(p => p.id === productId);
+  cart.push(product);
+  updateCart();
+
+  // Disable the button after adding to cart
+  const buttons = document.querySelectorAll(`button[onclick="addToCart(${productId})"]`);
+  buttons.forEach(btn => {
+    btn.disabled = true;
+    btn.textContent = "Added";
+    btn.style.background = "#ccc";
+    btn.style.cursor = "not-allowed";
+  });
+}
+function addToCart(productId) {
+  const product = products.find(p => p.id === productId);
+  cart.push(product);
+  updateCart();
+
+  // Find the product card and update buttons
+  const productCards = document.querySelectorAll('.product');
+  productCards.forEach(card => {
+    if (card.innerHTML.includes(`addToCart(${productId})`)) {
+      const addBtn = card.querySelector('button');
+      addBtn.disabled = true;
+      addBtn.textContent = "Added";
+      addBtn.style.background = "#ccc";
+      addBtn.style.cursor = "not-allowed";
+
+      // Create Buy Now button
+      const buyBtn = document.createElement('button');
+      buyBtn.textContent = "Buy Now";
+      buyBtn.style.background = "#007185";
+      buyBtn.style.color = "white";
+      buyBtn.style.marginTop = "0.5rem";
+      buyBtn.style.padding = "0.5rem 1rem";
+      buyBtn.style.border = "none";
+      buyBtn.style.borderRadius = "4px";
+      buyBtn.style.cursor = "pointer";
+      buyBtn.onclick = () => {
+        alert(`Thank you for purchasing: ${product.name}`);
+      };
+      card.appendChild(buyBtn);
+
+    }
+  });
+}
+
+
+</script>
+
+</body>
+</html>

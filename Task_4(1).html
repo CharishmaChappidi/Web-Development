@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Charishma Chappidi | Portfolio</title>
+  <style>
+    :root {
+      --primary-color: #0077cc;
+      --bg-color: #f9f9f9;
+      --text-color: #333;
+      --font-family: 'Segoe UI', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      margin-top: 1rem;
+    }
+
+    nav ul li {
+      margin: 0 1rem;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    section {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+
+    ul {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .project-card h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    input, textarea {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: var(--font-family);
+    }
+
+    button {
+      padding: 0.75rem;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #eee;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 600px) {
+      nav ul {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Charishma Chappidi</h1>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I’m an enthusiastic and detail-oriented Bachelor of Technology student at Mohan Babu University, with a strong foundation in Python, HTML, CSS, JavaScript, and PHP. I completed a Web Development internship at Motion Cut, where I applied my technical skills to real-world projects.</p>
+    <p><strong>Education:</strong></p>
+    <ul>
+      <li><strong>B.Tech (2022–2026)</strong> – Mohan Babu University, GPA: 8.6</li>
+      <li><strong>Intermediate (2020–2022)</strong> – Sri Chaitanya Junior College, Percentage: 70%</li>
+      <li><strong>10th Class (2019–2020)</strong> – Ravindra Bharathi School, GPA: 9.8</li>
+    </ul>
+    <p><strong>Technical Skills:</strong></p>
+    <ul>
+      <li>HTML, CSS, JavaScript, PHP, Python</li>
+      <li>Microsoft Word, Microsoft PowerPoint</li>
+    </ul>
+    <p><strong>Languages:</strong> Telugu, English, Hindi</p>
+  </section>
+
+  <section id="projects">
+    <h2>Projects & Achievements</h2>
+    <div class="projects">
+      <div class="project-card">
+        <h3>Web Development Internship</h3>
+        <p>Successfully completed a Web Development internship at Motion Cut, demonstrating quick learning and application of front-end technologies.</p>
+      </div>
+      <div class="project-card">
+        <h3>Portfolio Website</h3>
+        <p>Designed and built this responsive portfolio using HTML, CSS, and JavaScript to showcase my skills and achievements.</p>
+        <a href="https://github.com/CharishmaChappidi" target="_blank">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <p><strong>Email:</strong> <a href="mailto:charishmachappidi12@gmail.com">charishmachappidi12@gmail.com</a></p>
+    <p><strong>Phone:</strong> <a href="tel:+919618032755">9618032755</a></p>
+    <p><strong>Location:</strong> B.Kammapalli Village, Obulavaripalle Mandal, Kadapa District, Andhra Pradesh, 516110</p>
+    <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/charishma-chappidi-247936264/" target="_blank">charishma-chappidi</a></p>
+    <p><strong>GitHub:</strong> <a href="https://github.com/CharishmaChappidi" target="_blank">CharishmaChappidi</a></p>
+    <form id="contactForm">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Charishma Chappidi. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Thank you! Your message has been sent.");
+    });
+  </script>
+
+</body>
+</html>
